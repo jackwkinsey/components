@@ -6,6 +6,10 @@ Based on the Table component from Exaptive
 Ported by: Matt Coatney
 Ported on: June 30, 2017
 
+Copyright (C) 2017 Exaptive Inc.
+The components in this repository are distributed under the terms of the GNU General Public License (GPL) v3.0. (https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+
 For a working example, see xtable_example.html.
 
 Inputs:
