@@ -1,0 +1,151 @@
+<!--
+
+Simple example web page for demonstrating the use of the XTable library. Modern versions of some browsers support loading 
+Javascript-enabled webpages from the local file system, however you may need to load this page and its dependencies in a 
+web server (e.g. Apache httpd) to work properly.
+
+To use the XTable library, you must do the following:
+
+1. Include the xtable.css and Font Awesome CSS dependencies
+2. Include the xtable.js and Sortable JavaScript dependencies
+3. Create div(s) with specific classes and an ID that will contain the xtable
+4. Define the desired options as a JSON object (see below for several examples)
+5. Fetch the relevant data as a JSON array of dictionary objects (e.g. from a SQL query)
+6. Instantiate the XTable with the div id, data and options
+
+To refresh the data, you can call updateData(data) with a new data object, or simply instantiate a new table with the same ID.
+
+-->
+<html>
+    <head>
+        <!-- Includes for style sheets -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="xtable.css">
+
+        <!-- Includes for required Javascript libraries -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
+        <script src="xtable.js"></script>
+
+    </head>
+    <body style="width:800px; margin: 50px 0 0 100px">
+        <!-- Container for table div - use classes to further customize CSS -->
+        <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable1"></div>
+
+        <div style="clear:both;margin-top:50px;"></div>
+        <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable2"></div>
+
+        <div style="clear:both;margin-top:50px;"></div>
+        <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable3"></div>
+    </body>
+
+    <script>
+        <!-- Script to configure the table. See the xtable.js file for data and option formats -->
+        data = {
+            "columns": [
+                {
+                    "id": "id",
+                    "label": "Unique ID"
+                },
+                {
+                    "id": "name",
+                    "label": "Full Name"                
+                },
+                {
+                    "id": "age",
+                    "label": "Age (Years)"                
+                }
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "name": "Bill Freese",
+                    "age": 37
+                },
+                {
+                    "id": 2,
+                    "name": "Lucinda Belle",
+                    "age": 32
+                },
+                {
+                    "id": 3,
+                    "name": "Fred McCabe",
+                    "age": 43
+                },
+                {
+                    "id": 4,
+                    "name": "Tom Brezeley",
+                    "age": 52
+                },
+                {
+                    "id": 5,
+                    "name": "Linda Turkelson",
+                    "age": 41
+                }
+            ]
+        }
+        
+        <!-- Example of options for a simple table, with no selection and simple formatting -->
+        options1 = {
+            "style": [
+                "hover"
+            ],
+            "selection": {
+                "allow": false,
+                "multiSelect": false,
+                "indicator": false
+            },
+            "edit": false,
+            "drag": false,
+            "remove": false,
+            "columnClick": true,
+            "columnOrder": [],
+            "rowOrder": ""
+        }
+        
+        var table = new XTable("xtable1", data, options1);
+
+        
+        <!-- Example of more sophisticated table with single selection and row striping -->
+        options2 = {
+            "style": [
+                "striped"
+            ],
+            "selection": {
+                "allow": true,
+                "multiSelect": false,
+                "indicator": false
+            },
+            "edit": false,
+            "drag": false,
+            "remove": false,
+            "columnClick": true,
+            "columnOrder": [],
+            "rowOrder": ""
+        }
+        
+        var table = new XTable("xtable2", data, options2);
+
+        
+        <!-- Example of more sophisticated table with multiple selection and dragging/dropping of rows -->
+        options3 = {
+            "style": [
+                "bordered"
+            ],
+            "selection": {
+                "allow": true,
+                "multiSelect": true,
+                "indicator": true
+            },
+            "edit": true,
+            "drag": true,
+            "remove": true,
+            "columnClick": true,
+            "columnOrder": ["id", "age", "name"],
+            "rowOrder": "age desc"
+        }
+        
+        var table = new XTable("xtable3", data, options3);
+    </script>
+
+
+</html>
