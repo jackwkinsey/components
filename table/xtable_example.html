@@ -21,30 +21,33 @@ The components in this repository are distributed under the terms of the GNU Gen
 
 -->
 <html>
-    <head>
-        <!-- Includes for style sheets -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="xtable.css">
 
-        <!-- Includes for required Javascript libraries -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
-        <script src="xtable.js"></script>
+<head>
+    <!-- Includes for style sheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="xtable.css">
 
-    </head>
-    <body style="width:800px; margin: 50px 0 0 100px">
-        <!-- Container for table div - use classes to further customize CSS -->
-        <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable1"></div>
 
-        <div style="clear:both;margin-top:50px;"></div>
-        <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable2"></div>
 
-        <div style="clear:both;margin-top:50px;"></div>
-        <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable3"></div>
-    </body>
+</head>
+
+<body style="width:800px; margin: 50px 0 0 100px">
+    <!-- Container for table div - use classes to further customize CSS -->
+    <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable1"></div>
+
+    <div style="clear:both;margin-top:50px;"></div>
+    <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable2"></div>
+
+    <div style="clear:both;margin-top:50px;"></div>
+    <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="xtable3"></div>
+
+    <!-- Includes for required Javascript libraries -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
+    <script src="xtable.js"></script>
 
     <script>
-        <!-- Script to configure the table. See the xtable.js file for data and option formats -->
-        data = {
+        //Script to configure the table. See the xtable.js file for data and option formats -->
+        var data = {
             "columns": [
                 {
                     "id": "id",
@@ -52,44 +55,53 @@ The components in this repository are distributed under the terms of the GNU Gen
                 },
                 {
                     "id": "name",
-                    "label": "Full Name"                
+                    "label": "Full Name"
                 },
                 {
                     "id": "age",
-                    "label": "Age (Years)"                
+                    "label": "Age (Years)"
+                },
+                {
+                    "id": "dob",
+                    "label": "Birthdate"
                 }
             ],
             "rows": [
                 {
                     "id": 1,
                     "name": "Bill Freese",
-                    "age": 37
+                    "age": 37,
+                    "dob": new Date(1980, 5, 31).toLocaleDateString()
                 },
                 {
                     "id": 2,
                     "name": "Lucinda Belle",
-                    "age": 32
+                    "age": 32,
+                    "dob": new Date(1985, 3, 20).toLocaleDateString()
                 },
                 {
                     "id": 3,
                     "name": "Fred McCabe",
-                    "age": 43
+                    "age": 43,
+                    "dob": new Date(1974, 1, 1).toLocaleDateString()
                 },
                 {
                     "id": 4,
                     "name": "Tom Brezeley",
-                    "age": 52
+                    "age": 52,
+                    "dob": new Date(1965, 5, 7).toLocaleDateString()
                 },
                 {
                     "id": 5,
                     "name": "Linda Turkelson",
-                    "age": 41
+                    "age": 41,
+                    "dob": new Date(1976, 6, 6).toLocaleDateString()
                 }
             ]
-        }
-        
-        <!-- Example of options for a simple table, with no selection and simple formatting -->
-        options1 = {
+        };
+
+        //Example of options for a simple table, with no selection and simple formatting
+        var options1 = {
             "style": [
                 "hover"
             ],
@@ -104,13 +116,13 @@ The components in this repository are distributed under the terms of the GNU Gen
             "columnClick": true,
             "columnOrder": [],
             "rowOrder": ""
-        }
-        
+        };
+
         var table = new XTable("xtable1", 'Example 01', data, options1);
 
-        
-        <!-- Example of more sophisticated table with single selection and row striping -->
-        options2 = {
+
+        //Example of more sophisticated table with single selection and row striping
+        var options2 = {
             "style": [
                 "striped"
             ],
@@ -125,13 +137,13 @@ The components in this repository are distributed under the terms of the GNU Gen
             "columnClick": true,
             "columnOrder": [],
             "rowOrder": ""
-        }
-        
+        };
+
         var table = new XTable("xtable2", 'Example 02', data, options2);
 
-        
-        <!-- Example of more sophisticated table with multiple selection and dragging/dropping of rows -->
-        options3 = {
+
+        //Example of more sophisticated table with multiple selection and dragging/dropping of rows
+        var options3 = {
             "style": [
                 "bordered"
             ],
@@ -146,10 +158,11 @@ The components in this repository are distributed under the terms of the GNU Gen
             "columnClick": true,
             "columnOrder": ["id", "age", "name"],
             "rowOrder": "age desc"
-        }
-        
+        };
+
         var table = new XTable("xtable3", 'Example 03', data, options3);
     </script>
 
+</body>
 
 </html>
