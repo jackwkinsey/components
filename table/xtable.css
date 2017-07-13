@@ -632,3 +632,9 @@ tr.highlighted > td.button-drag i{
 tr.selected > td{
   background: #b3e5fc !important;
 }
+
+.table-title {
+  text-align: center;
+  margin: 0;
+  padding-top: 15px;
+}
