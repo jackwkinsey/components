@@ -17,6 +17,10 @@ Inputs:
 div_id: the id of the div in which to place the table, e.g. test_table for 
     <div class="exaptive-table-component table-responsive-vertical shadow-z-1" id="test_table"></div>
 
+title: a string that represents the title to use for the table, 
+    this is put into an `h1` tag at the top of the table and has the CSS 
+    class of `table-title`
+
 data: a dictionary containing two elements:
     columns: an array of dictionaries representing column definition, including id and label (used for display).
     rows: an array of dictionaries, one per row of data (assumes every column is defined in the dictionary, even if the data is empty). Each row is a dictionary, with the keys being column IDs and the values being either numeric, text, boolean or empty/null
@@ -43,8 +47,9 @@ Options: a dictionary containing the following elements:
 
 */
 
-var XTable = function(divId, data, options) {
+var XTable = function(divId, title, data, options) {
   this.divId = '';
+  this.title = '';
   this.rows = [];
   this.columns = [];
   this.options = {};
@@ -55,6 +60,7 @@ var XTable = function(divId, data, options) {
   this.sortAscending = true;
 
   this.divId = divId;
+  this.title = title;
   this.options = options;
   this.rowOrder = options.rowOrder ? options.rowOrder.split(' ') : [];
   this.updateData(data);
@@ -202,6 +208,7 @@ XTable.prototype.render = function() {
   let divId = this.divId;
   let columns = this.getColumns();
   let rows = this.getRows();
+  let titleHTML = '<h1 class="table-title">' + this.title + '</h1>';
 
         let headerHTML = '<thead><tr>';
         if (this.options.selection.indicator) { headerHTML += '<th></th>'; }
@@ -222,7 +229,7 @@ XTable.prototype.render = function() {
 
         headerHTML += '</tr></thead>';
   
-        let tableHTML = `<table class='table'>${headerHTML}<tbody>`;
+        let tableHTML = `${titleHTML}<table class='table'>${headerHTML}<tbody>`;
         rows.forEach(entity => {
             tableHTML += `<tr data-id='${entity.id}'>`;
 
