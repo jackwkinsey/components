@@ -83,7 +83,17 @@ XTable.prototype.setData = function (data) {
         this.columns.push(c.id);
 
         const value = rows[0][c.id];
-        this.colType[c.id] = isNaN(value) ? "text" : "numeric";
+        switch (typeof value) {
+            case 'number':
+                this.colType[c.id] = 'numeric';
+                break;
+            case 'object':
+                this.colType[c.id] = value instanceof Date ? 'date' : 'text';
+                break;
+            case 'string':
+            default:
+                this.colType[c.id] = 'text';
+        }
     }, this);
 
     this.rows = rows;
@@ -126,14 +136,14 @@ XTable.prototype.sortBy = function (column, ascending) {
         this.sortAscending = ascending;
     }
     this.sortColumn = column;
-    var sortType = this.getColumnType(this.colIDLookup[column]);
+    var sortType = this.getColumnType(column);
 
     this.rows = this.rows.sort((ra, rb) => {
         const a = ra[this.sortColumn];
         const b = rb[this.sortColumn];
         let sa;
         let sb;
-        if (sortType === 'numeric') {
+        if (sortType === 'numeric' || sortType === 'date') {
             sa = a;
             sb = b;
         } else {
@@ -247,8 +257,23 @@ XTable.prototype.render = function () {
         columns.forEach(c => {
             const value = entity[c.id];
             const colType = this.getColumnType(c.id)
-            const entry = colType == 'text' ? value : value.toString();
+            //const entry = colType === 'text' ? value : value.toString();
             const className = 'col-' + colType;
+
+            let entry = '';
+            
+            switch (colType) {
+                case 'text':
+                    entry = value;
+                    break;
+                case 'date':
+                    entry = value.toLocaleDateString();
+                    break;
+                case 'numeric':
+                default:
+                    entry = value.toString();
+            }
+
             tableHTML += `<td class='${className}' data-title='${c.label}'>${entry}</td>`;
         });
 

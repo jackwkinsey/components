@@ -613,6 +613,17 @@ th.col-text.sort-up::after {
   content: "\f062";
 }
 
+th.col-date.sorted::after {
+  font-family: FontAwesome;
+  padding-left: 6px;
+}
+th.col-date.sort-down::after {
+  content: "\f063";
+}
+th.col-date.sort-up::after {
+  content: "\f062";
+}
+
 td.button-cell {
 	width: 10px;
   cursor: pointer;
